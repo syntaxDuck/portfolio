@@ -2,6 +2,7 @@
 import React from 'react';
 import Skills from '../components/Skills';
 import ContactForm from '../components/ContactForm';
+import GithubProjects from '../components/GithubProjects';
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
         I'm [Your Name], a [Your Profession]. Explore my projects and read my blog to learn more about me.
       </p>
       <Skills />
+      <GithubProjects />
       <ContactForm />
     </div>
   );

@@ -1,18 +1,24 @@
 /* src/components/Navbar.module.css */
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .nav-links a {
-    margin-right: 15px;
-    color: white;
-    text-decoration: none;
-  }
-  
-  .nav-links a:hover {
-    text-decoration: underline;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #23272f;
+  padding: 16px 32px;
+  border-bottom: 2px solid #4ea1ff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+.nav-links a {
+  margin-right: 18px;
+  color: #4ea1ff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #90caff;
+  text-decoration: underline;
+}
