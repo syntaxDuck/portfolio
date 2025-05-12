@@ -1,6 +1,6 @@
 // src/pages/Projects.jsx
 import React, { useEffect, useState } from 'react';
-import { fetchGitHubRepos } from '../services/github';
+import { fetchGithubRepos } from '../services/github';
 import ProjectCard from '../components/ProjectCard';
 
 const Projects = () => {
@@ -9,7 +9,7 @@ const Projects = () => {
 
   useEffect(() => {
     const getRepos = async () => {
-      const data = await fetchGitHubRepos(githubUsername);
+      const data = await fetchGithubRepos(githubUsername);
       setRepos(data);
     };
     getRepos();
