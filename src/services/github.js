@@ -15,7 +15,7 @@ export const fetchGithubRepos = async (
     do {
       const headers = {};
       const token = getGithubToken();
-      if (token) headers['Authorization'] = `token ${token}`;
+      if (token) headers["Authorization"] = `token ${token}`;
       const reposResponse = await axios.get(
         `${GITHUB_API_BASE_URL}/users/${username}/repos`,
         { params: { per_page, page }, headers }
@@ -45,7 +45,7 @@ export const fetchGithubCommitHistory = async (
     do {
       const headers = {};
       const token = getGithubToken();
-      if (token) headers['Authorization'] = `token ${token}`;
+      if (token) headers["Authorization"] = `token ${token}`;
       const reposResponse = await axios.get(
         `${GITHUB_API_BASE_URL}/users/${username}/repos`,
         { params: { per_page, page }, headers }
@@ -67,7 +67,7 @@ export const fetchGithubCommitHistory = async (
         try {
           const headers = {};
           const token = getGithubToken();
-          if (token) headers['Authorization'] = `token ${token}`;
+          if (token) headers["Authorization"] = `token ${token}`;
           const activityRes = await axios.get(
             `${GITHUB_API_BASE_URL}/repos/${username}/${repo.name}/stats/commit_activity`,
             { headers }
