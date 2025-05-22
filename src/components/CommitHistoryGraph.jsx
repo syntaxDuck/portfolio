@@ -60,14 +60,31 @@ const CommitHistoryGraph = ({ username = GITHUB_USERNAME }) => {
         <div className={styles.gridColumns}>
           {data.map((week, weekIdx) => (
             <div key={weekIdx} className={styles.weekColumn}>
-              {week.days.map((count, dayIdx) => (
-                <div
-                  key={dayIdx}
-                  className={styles.daySquare}
-                  style={{ background: getColor(count) }}
-                  title={`Week ${weekIdx + 1}, Day ${dayIdx + 1}: ${count} commits`}
-                />
-              ))}
+              {week.days.map((count, dayIdx) => {
+                // Calculate the date for this cell
+                const firstDayOfYear = new Date(year, 0, 1);
+                const firstSundayOffset = (7 - firstDayOfYear.getDay()) % 7;
+                const firstSunday = new Date(year, 0, 1 + firstSundayOffset);
+                const cellDate = new Date(firstSunday);
+                cellDate.setDate(cellDate.getDate() + weekIdx * 7 + dayIdx);
+                const isInYear = cellDate.getFullYear() === year;
+                let tooltip = '';
+                if (isInYear) {
+                  if (count > 0) {
+                    tooltip = `${cellDate.toLocaleDateString()}: ${count} commit${count !== 1 ? 's' : ''}`;
+                  } else {
+                    tooltip = cellDate.toLocaleDateString();
+                  }
+                }
+                return (
+                  <div
+                    key={dayIdx}
+                    className={styles.daySquare}
+                    style={{ background: getColor(count) }}
+                    title={tooltip}
+                  />
+                );
+              })}
             </div>
           ))}
         </div>
