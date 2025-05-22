@@ -3,6 +3,7 @@ import React from 'react';
 import Skills from '../components/Skills';
 import ContactForm from '../components/ContactForm';
 import GithubProjects from '../components/GithubProjects';
+import CommitHistoryGraph from '../components/CommitHistoryGraph';
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       </p>
       <Skills />
       <GithubProjects />
+      <CommitHistoryGraph />
       <ContactForm />
     </div>
   );
