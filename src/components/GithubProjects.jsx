@@ -9,10 +9,11 @@ const GithubProjects = ({ username = GITHUB_USERNAME }) => {
   const [allRepos, setAllRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
+  const [current, setCurrent] = useState(0);
+  const [animating, setAnimating] = useState(false);
+  const [direction, setDirection] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
     fetchGithubRepos(username)
       .then(data => {
         setAllRepos(data.repos || []);
@@ -24,8 +25,45 @@ const GithubProjects = ({ username = GITHUB_USERNAME }) => {
       });
   }, [username]);
 
-  const totalPages = Math.ceil(allRepos.length / REPOS_PER_PAGE);
-  const paginatedRepos = allRepos.slice((page - 1) * REPOS_PER_PAGE, page * REPOS_PER_PAGE);
+  const handlePrev = () => {
+    if (animating) return;
+    setDirection('prev');
+    setAnimating(true);
+    setTimeout(() => {
+      setCurrent((prev) => (prev - 4 + allRepos.length) % allRepos.length);
+      setAnimating(false);
+    }, 150);
+  };
+  const handleNext = () => {
+    if (animating) return;
+    setDirection('next');
+    setAnimating(true);
+    setTimeout(() => {
+      setCurrent((prev) => (prev + 4) % allRepos.length);
+      setAnimating(false);
+    }, 150);
+  };
+
+  const getCarouselIndices = () => {
+    // Show 4 cards: current, next, next+1, next+2
+    const n = allRepos.length;
+    if (n === 0) return [];
+    return [
+      current,
+      (current + 1) % n,
+      (current + 2) % n,
+      (current + 3) % n
+    ];
+  };
+  const carouselIndices = getCarouselIndices();
+
+  const getPositionClass = (idx) => {
+    if (idx === 0) return styles.leftCard;
+    if (idx === 1) return styles.centerLeftCard;
+    if (idx === 2) return styles.centerRightCard;
+    if (idx === 3) return styles.rightCard;
+    return '';
+  };
 
   if (loading) return <div className={styles.loading}>Loading GitHub projects...</div>;
   if (error) return <div className={styles.error}>{error}</div>;
@@ -33,42 +71,31 @@ const GithubProjects = ({ username = GITHUB_USERNAME }) => {
   return (
     <section className={styles.githubSection}>
       <h2 className={styles.heading}>GitHub Projects</h2>
-      <div className={styles.projectsGrid}>
-        {paginatedRepos.map(repo => (
-          <a
-            key={repo.id}
-            href={repo.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.projectCard}
-          >
-            <h3>{repo.name}</h3>
-            <p>{repo.description || 'No description provided.'}</p>
-            <div className={styles.repoMeta}>
-              <span>★ {repo.stargazers_count}</span>
-              <span>Forks: {repo.forks_count}</span>
-            </div>
-          </a>
-        ))}
+      <div className={`${styles.carouselWrapper} ${animating ? (direction === 'next' ? styles.animNext : styles.animPrev) : ''}`}>
+        {carouselIndices.map((repoIdx, idx) => {
+          const repo = allRepos[repoIdx];
+          if (!repo) return null;
+          return (
+            <a
+              key={repo.id}
+              href={repo.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${styles.projectCard} ${getPositionClass(idx)}`}
+            >
+              <h3>{repo.name}</h3>
+              <p>{repo.description || 'No description provided.'}</p>
+              <div className={styles.repoMeta}>
+                <span>★ {repo.stargazers_count}</span>
+                <span>Forks: {repo.forks_count}</span>
+              </div>
+            </a>
+          );
+        })}
       </div>
-      <div className={styles.pagination}>
-        <button
-          onClick={() => setPage(page - 1)}
-          disabled={page === 1}
-          className={styles.pageButton}
-        >
-          Previous
-        </button>
-        <span className={styles.pageInfo}>
-          Page {page} of {totalPages}
-        </span>
-        <button
-          onClick={() => setPage(page + 1)}
-          disabled={page === totalPages}
-          className={styles.pageButton}
-        >
-          Next
-        </button>
+      <div className={styles.carouselNavRow}>
+        <button onClick={handlePrev} className={styles.carouselButton} aria-label="Previous project">&#8592;</button>
+        <button onClick={handleNext} className={styles.carouselButton} aria-label="Next project">&#8594;</button>
       </div>
     </section>
   );
