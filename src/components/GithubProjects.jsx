@@ -6,27 +6,26 @@ const GITHUB_USERNAME = 'syntaxDuck';
 const REPOS_PER_PAGE = 4;
 
 const GithubProjects = ({ username = GITHUB_USERNAME }) => {
-  const [repos, setRepos] = useState([]);
+  const [allRepos, setAllRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
-  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
     setLoading(true);
-    fetchGithubRepos(username, REPOS_PER_PAGE, page)
+    fetchGithubRepos(username)
       .then(data => {
-        setRepos(data.repos);
-        setTotalCount(data.totalCount);
+        setAllRepos(data.repos || []);
         setLoading(false);
       })
       .catch(err => {
         setError('Failed to load repositories.');
         setLoading(false);
       });
-  }, [username, page]);
+  }, [username]);
 
-  const totalPages = Math.ceil(totalCount / REPOS_PER_PAGE);
+  const totalPages = Math.ceil(allRepos.length / REPOS_PER_PAGE);
+  const paginatedRepos = allRepos.slice((page - 1) * REPOS_PER_PAGE, page * REPOS_PER_PAGE);
 
   if (loading) return <div className={styles.loading}>Loading GitHub projects...</div>;
   if (error) return <div className={styles.error}>{error}</div>;
@@ -35,7 +34,7 @@ const GithubProjects = ({ username = GITHUB_USERNAME }) => {
     <section className={styles.githubSection}>
       <h2 className={styles.heading}>GitHub Projects</h2>
       <div className={styles.projectsGrid}>
-        {repos.map(repo => (
+        {paginatedRepos.map(repo => (
           <a
             key={repo.id}
             href={repo.html_url}
