@@ -69,35 +69,53 @@ const GithubProjects = ({ username = GITHUB_USERNAME }) => {
   if (error) return <div className={styles.error}>{error}</div>;
 
   return (
-    <section className={styles.githubSection}>
-      <h2 className={styles.heading}>GitHub Projects</h2>
-      <div className={`${styles.carouselWrapper} ${animating ? (direction === 'next' ? styles.animNext : styles.animPrev) : ''}`}>
-        {carouselIndices.map((repoIdx, idx) => {
-          const repo = allRepos[repoIdx];
-          if (!repo) return null;
-          return (
-            <a
-              key={repo.id}
-              href={repo.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${styles.projectCard} ${getPositionClass(idx)}`}
-            >
-              <h3>{repo.name}</h3>
-              <p>{repo.description || 'No description provided.'}</p>
-              <div className={styles.repoMeta}>
-                <span>★ {repo.stargazers_count}</span>
-                <span>Forks: {repo.forks_count}</span>
-              </div>
-            </a>
-          );
-        })}
-      </div>
-      <div className={styles.carouselNavRow}>
-        <button onClick={handlePrev} className={styles.carouselButton} aria-label="Previous project">&#8592;</button>
-        <button onClick={handleNext} className={styles.carouselButton} aria-label="Next project">&#8594;</button>
-      </div>
-    </section>
+    <>
+      <section className={styles.heroSection}>
+        <div className={styles.heroGradientBg} />
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>Hi, I'm Kameron Comer</h1>
+          <p className={styles.heroSubtitle}>
+            Software Engineer &amp; Full Stack Developer
+          </p>
+          <p className={styles.heroDescription}>
+            I build modern web applications with a focus on performance, accessibility, and beautiful user experiences. Explore my portfolio to see my latest projects, GitHub activity, and more.
+          </p>
+          <div className={styles.heroActions}>
+            <a href="#projects" className={styles.heroButton}>View Projects</a>
+            <a href="#contact" className={styles.heroButtonOutline}>Contact Me</a>
+          </div>
+        </div>
+      </section>
+      <section className={styles.githubSection}>
+        <h2 className={styles.heading}>GitHub Projects</h2>
+        <div className={`${styles.carouselWrapper} ${animating ? (direction === 'next' ? styles.animNext : styles.animPrev) : ''}`}>
+          {carouselIndices.map((repoIdx, idx) => {
+            const repo = allRepos[repoIdx];
+            if (!repo) return null;
+            return (
+              <a
+                key={repo.id}
+                href={repo.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.projectCard} ${getPositionClass(idx)}`}
+              >
+                <h3>{repo.name}</h3>
+                <p>{repo.description || 'No description provided.'}</p>
+                <div className={styles.repoMeta}>
+                  <span>★ {repo.stargazers_count}</span>
+                  <span>Forks: {repo.forks_count}</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+        <div className={styles.carouselNavRow}>
+          <button onClick={handlePrev} className={styles.carouselButton} aria-label="Previous project">&#8592;</button>
+          <button onClick={handleNext} className={styles.carouselButton} aria-label="Next project">&#8594;</button>
+        </div>
+      </section>
+    </>
   );
 };
 
