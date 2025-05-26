@@ -112,6 +112,54 @@
   pointer-events: none;
 }
 
+.heroEffectSelector {
+  position: absolute;
+  top: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  z-index: 2;
+  background: rgba(24,26,27,0.82);
+  border-radius: 2rem;
+  box-shadow: 0 2px 12px #00336633;
+  padding: 0.3rem 1.2rem 0.3rem 1.2rem;
+}
+.heroEffectSelector button {
+  background: transparent;
+  color: #4ea1ff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.3rem 0.9rem;
+  transition: background 0.18s, color 0.18s, transform 0.18s;
+  outline: none;
+  box-shadow: none;
+}
+.heroEffectSelector button:disabled {
+  color: #90caff;
+  opacity: 0.7;
+  cursor: default;
+}
+.heroEffectSelector button:hover:not(:disabled),
+.heroEffectSelector button:focus:not(:disabled) {
+  background: #1e40af;
+  color: #fff;
+  transform: scale(1.13);
+}
+.heroEffectSelector span {
+  color: #4ea1ff;
+  font-weight: 600;
+  font-size: 1.08rem;
+  min-width: 120px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  user-select: none;
+}
+
 @media (max-width: 600px) {
   .heroSection {
     min-height: 100vh;
