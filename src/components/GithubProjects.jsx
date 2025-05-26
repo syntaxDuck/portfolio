@@ -147,26 +147,6 @@ const GithubProjects = ({ username = GITHUB_USERNAME }) => {
 
   return (
     <>
-      <section className={styles.heroSection}>
-        <div className={styles.heroGameOfLifeBg}>
-          {/* Conway's Game of Life Canvas */}
-          <canvas id="gameOfLifeCanvas" className={styles.gameOfLifeCanvas} />
-        </div>
-        <div className={styles.heroGradientBg} />
-        <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>Hi, I'm Kameron Comer</h1>
-          <p className={styles.heroSubtitle}>
-            Software Engineer &amp; Full Stack Developer
-          </p>
-          <p className={styles.heroDescription}>
-            I build modern web applications with a focus on performance, accessibility, and beautiful user experiences. Explore my portfolio to see my latest projects, GitHub activity, and more.
-          </p>
-          <div className={styles.heroActions}>
-            <a href="#projects" className={styles.heroButton}>View Projects</a>
-            <a href="#contact" className={styles.heroButtonOutline}>Contact Me</a>
-          </div>
-        </div>
-      </section>
       <section className={styles.githubSection}>
         <h2 className={styles.heading}>GitHub Projects</h2>
         <div className={`${styles.carouselWrapper} ${animating ? (direction === 'next' ? styles.animNext : styles.animPrev) : ''}`}>
