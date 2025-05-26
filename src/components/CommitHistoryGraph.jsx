@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './CommitHistoryGraph.module.css';
+import styles from './styles/CommitHistoryGraph.module.css';
 import { fetchGithubCommitHistory } from '../services/github';
 
 const GITHUB_USERNAME = process.env.REACT_APP_GITHUB_USERNAME;

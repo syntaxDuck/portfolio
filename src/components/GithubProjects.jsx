@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './GithubProjects.module.css';
+import styles from './styles/GithubProjects.module.css';
 import { fetchGithubRepos } from '../services/github';
 
 const GITHUB_USERNAME = 'syntaxDuck';
