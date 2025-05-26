@@ -12,8 +12,8 @@ const LissajousEffect = ({ className = '', style = {} }) => {
     let t = 0;
     let animationId;
     function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width = window.outerWidth;
+      canvas.height = window.outerHeight;
     }
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);

@@ -3,15 +3,17 @@ import styles from './styles/HeroSection.module.css';
 import GameOfLifeEffect from './heroEffects/GameOfLifeEffect';
 import FlowFieldEffect from './heroEffects/FlowFieldEffect';
 import LissajousEffect from './heroEffects/LissajousEffect';
+import BoidsEffect from './heroEffects/BoidsEffect';
 
 const HeroSection = () => {
-  const [animation, setAnimation] = useState('life'); // 'life', 'flow', or 'lissajous'
+  const [animation, setAnimation] = useState('life'); // 'life', 'flow', 'lissajous', or 'boids'
 
   // List of available effects
   const effects = [
     { key: 'life', label: 'Game of Life', component: GameOfLifeEffect },
     { key: 'flow', label: 'Flow Field', component: FlowFieldEffect },
     { key: 'lissajous', label: 'Lissajous Curves', component: LissajousEffect },
+    { key: 'boids', label: 'Boids (Flocking)', component: BoidsEffect },
   ];
   const currentIdx = effects.findIndex(e => e.key === animation);
   const handlePrev = () => {
