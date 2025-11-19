@@ -1,13 +1,3 @@
-/* src/App.css */
-
-/* Modern dark theme with blue accent */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  background: #181a1b;
-  color: #f3f6fa;
-}
-
 .app-container {
   display: flex;
   flex-direction: column;
@@ -15,11 +5,11 @@ body {
   background: #181a1b;
 }
 
-main {
+/* main {
   flex: 1;
   padding: 32px 20px;
   background: #181a1b;
-}
+} */
 
 .navbar,
 .footer {
@@ -41,66 +31,4 @@ main {
 .navbar a:hover,
 .footer a:hover {
   color: #90caff;
-}
-
-.projects-grid,
-.blog-posts-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 28px;
-}
-
-.project-card,
-.blog-post-card,
-.contact-form,
-.skills-section {
-  background: #23272f;
-  border: 1px solid #263043;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  transition: box-shadow 0.2s, border 0.2s;
-}
-
-.project-card:hover,
-.blog-post-card:hover {
-  border: 1.5px solid #4ea1ff;
-  box-shadow: 0 4px 24px rgba(78,161,255,0.12);
-}
-
-.contact-form label {
-  display: block;
-  margin-bottom: 8px;
-  color: #90caff;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 14px;
-  border: 1px solid #263043;
-  border-radius: 8px;
-  background: #181a1b;
-  color: #f3f6fa;
-  font-size: 1rem;
-}
-
-.contact-form button {
-  background: #4ea1ff;
-  color: #181a1b;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 24px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.contact-form button:hover {
-  background: #90caff;
-}
-
-.skills-section h3 {
-  color: #4ea1ff;
 }

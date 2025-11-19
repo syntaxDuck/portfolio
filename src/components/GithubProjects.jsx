@@ -163,10 +163,6 @@ const GithubProjects = ({ username = GITHUB_USERNAME }) => {
               >
                 <h3>{repo.name}</h3>
                 <p>{repo.description || 'No description provided.'}</p>
-                <div className={styles.repoMeta}>
-                  <span>★ {repo.stargazers_count}</span>
-                  <span>Forks: {repo.forks_count}</span>
-                </div>
               </a>
             );
           })}
