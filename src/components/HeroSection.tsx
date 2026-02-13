@@ -67,15 +67,15 @@ const HeroSection = () => {
         <motion.div variants={itemVariants} className="mb-2">
           <button
             onClick={handlePrev}
-            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark hover:bg-primary/10 dark:hover:bg-primary-dark/10 transition-colors"
+            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark font-mono text-sm hover:bg-primary/10 dark:hover:bg-primary-dark/10 transition-colors"
             aria-label="Previous Effect"
           >
             ←
           </button>
-          <span className="text-muted dark:text-muted-dark text-sm">{effects[currentIdx].label}</span>
+          <span className="text-muted dark:text-muted-dark text-sm font-mono">{effects[currentIdx].label}</span>
           <button
             onClick={handleNext}
-            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark hover:bg-primary/10 dark:hover:bg-primary-dark/10 transition-colors"
+            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark font-mono text-sm hover:bg-primary/10 dark:hover:bg-primary-dark/10 transition-colors"
             aria-label="Next Effect"
           >
             →
@@ -84,14 +84,14 @@ const HeroSection = () => {
 
         <motion.h1
           variants={itemVariants}
-          className="text-4xl md:text-5xl font-extrabold text-text dark:text-text-dark mb-4 tracking-tight"
+          className="text-4xl md:text-5xl font-bold text-text dark:text-text-dark mb-4 tracking-tight font-mono"
         >
           Hi, I'm Kameron Comer
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
-          className="text-xl md:text-2xl text-secondary dark:text-secondary-dark font-medium mb-5"
+          className="text-xl md:text-2xl text-secondary dark:text-secondary-dark font-mono mb-5"
         >
           Software Engineer & Full Stack Developer
         </motion.p>
@@ -106,13 +106,13 @@ const HeroSection = () => {
         <motion.div variants={itemVariants} className="flex justify-center gap-4">
           <a
             href="#projects"
-            className="px-6 py-3 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark font-semibold rounded-sm hover:opacity-90 transition-opacity"
+            className="px-6 py-3 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark font-mono text-sm font-medium rounded-sm hover:opacity-90 transition-opacity"
           >
             View Projects
           </a>
           <a
             href="#contact"
-            className="px-6 py-3 border-2 border-primary dark:border-primary-dark text-primary dark:text-primary-dark font-semibold rounded-sm hover:bg-gradient-accent dark:hover:bg-gradient-accent-dark hover:border-transparent hover:text-white dark:hover:text-bg-dark transition-all"
+            className="px-6 py-3 border-2 border-primary dark:border-primary-dark text-primary dark:text-primary-dark font-mono text-sm font-medium rounded-sm hover:bg-gradient-accent dark:hover:bg-gradient-accent-dark hover:border-transparent hover:text-white dark:hover:text-bg-dark transition-all"
           >
             Contact Me
           </a>

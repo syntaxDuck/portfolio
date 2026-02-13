@@ -32,7 +32,7 @@ const Navbar = () => {
           transition={{ duration: 0.3 }}
           className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-gradient-bg dark:bg-gradient-bg-dark border-b-2 border-primary"
         >
-          <div className="text-xl font-semibold text-primary dark:text-primary-dark">
+          <div className="text-xl font-semibold text-primary dark:text-primary-dark font-mono tracking-tight">
             <Link to="/">My Portfolio</Link>
           </div>
           <div className="flex items-center gap-5">
@@ -40,7 +40,7 @@ const Navbar = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className="text-primary dark:text-primary-dark font-medium hover:text-primary/80 dark:hover:text-primary-dark/80 transition-colors duration-200"
+                className="text-primary dark:text-primary-dark font-mono text-sm uppercase tracking-wide hover:text-primary/80 dark:hover:text-primary-dark/80 transition-colors duration-200"
               >
                 {link.label}
               </Link>
