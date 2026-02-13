@@ -9,7 +9,7 @@ const Footer = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="px-8 py-4 bg-bg2 dark:bg-bg2-dark text-text dark:text-text-dark border-t border-borderMuted dark:border-borderMuted shadow-md"
+      className="px-8 py-4 bg-gradient-bg dark:bg-gradient-bg-dark text-text dark:text-text-dark border-t border-borderMuted dark:border-borderMuted"
     >
       <div className="flex flex-col md:flex-row items-center justify-between gap-2">
         <p className="text-muted dark:text-muted-dark text-sm">

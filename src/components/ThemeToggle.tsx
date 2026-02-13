@@ -9,7 +9,7 @@ function ThemeToggle() {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       onClick={toggleTheme}
-      className="p-2 rounded-lg bg-bg2 dark:bg-bg2-dark border border-borderMuted dark:border-borderMuted hover:border-primary dark:hover:border-primary transition-colors"
+      className="p-2 rounded-sm bg-bg2 dark:bg-bg2-dark border border-borderMuted dark:border-borderMuted hover:border-primary dark:hover:border-primary transition-colors"
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
       {theme === 'dark' ? (

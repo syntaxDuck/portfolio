@@ -24,8 +24,8 @@ const blogPosts: BlogPost[] = [
 const Blog = () => {
   return (
     <div className="max-w-4xl mx-auto py-8">
-      <h2 className="text-3xl font-bold text-primary mb-8">My Blog</h2>
-      <div className="grid gap-6">
+      <h2 className="text-3xl font-bold text-primary dark:text-primary-dark mb-8 border-l-4 border-primary dark:border-primary-dark pl-4">My Blog</h2>
+      <div className="grid divide-y divide-borderMuted dark:divide-borderMuted">
         {blogPosts.map((post) => (
           <BlogPostCard key={post.slug} post={post} />
         ))}

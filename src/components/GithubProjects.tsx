@@ -32,10 +32,10 @@ const GithubProjects: React.FC<GithubProjectsProps> = ({ username }) => {
   const carouselIndices = getCarouselIndices();
 
   const cardVariants = {
-    center: { scale: 1, opacity: 1, zIndex: 10 },
-    left: { scale: 0.95, opacity: 0.7, x: -50, zIndex: 5 },
-    right: { scale: 0.95, opacity: 0.7, x: 50, zIndex: 5 },
-    hidden: { scale: 0.9, opacity: 0, zIndex: 0 },
+    center: { opacity: 1, zIndex: 10 },
+    left: { opacity: 0.7, zIndex: 5 },
+    right: { opacity: 0.7, zIndex: 5 },
+    hidden: { opacity: 0, zIndex: 0 },
   };
 
   if (loading) return (
@@ -52,12 +52,12 @@ const GithubProjects: React.FC<GithubProjectsProps> = ({ username }) => {
 
   return (
     <section className="py-12">
-      <h2 className="text-3xl font-bold text-primary dark:text-primary-dark mb-8 text-left">GitHub Projects</h2>
+      <h2 className="text-3xl font-bold text-primary dark:text-primary-dark mb-8 text-left border-l-4 border-primary dark:border-primary-dark pl-4">GitHub Projects</h2>
 
       <div className="relative flex items-center justify-center gap-4 min-h-[320px]">
         <button
           onClick={handlePrev}
-          className="z-20 w-12 h-12 bg-primary dark:bg-primary-dark text-bg dark:text-bg-dark font-bold text-xl rounded-lg hover:bg-primary/80 dark:hover:bg-primary-dark/80 transition-colors shadow-lg flex items-center justify-center"
+          className="z-20 w-12 h-12 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark font-bold text-xl rounded-sm hover:opacity-90 transition-opacity flex items-center justify-center"
           aria-label="Previous project"
         >
           ←
@@ -82,7 +82,7 @@ const GithubProjects: React.FC<GithubProjectsProps> = ({ username }) => {
                 animate={position}
                 variants={cardVariants}
                 transition={{ duration: 0.3 }}
-                className="flex-1 min-w-0 max-w-sm bg-bg2 dark:bg-bg2-dark text-text dark:text-text-dark rounded-xl p-5 shadow-xl border border-borderMuted dark:border-borderMuted hover:border-primary dark:hover:border-primary transition-colors flex flex-col justify-between"
+                className="flex-1 min-w-0 max-w-sm bg-bg2 dark:bg-bg2-dark text-text dark:text-text-dark rounded-sm p-5 border border-borderMuted dark:border-borderMuted hover:border-primary dark:hover:border-primary transition-colors flex flex-col justify-between"
               >
                 <div>
                   <h3 className="text-lg font-semibold text-primary dark:text-primary-dark mb-2">{repo.name}</h3>
@@ -101,7 +101,7 @@ const GithubProjects: React.FC<GithubProjectsProps> = ({ username }) => {
 
         <button
           onClick={handleNext}
-          className="z-20 w-12 h-12 bg-primary dark:bg-primary-dark text-bg dark:text-bg-dark font-bold text-xl rounded-lg hover:bg-primary/80 dark:hover:bg-primary-dark/80 transition-colors shadow-lg flex items-center justify-center"
+          className="z-20 w-12 h-12 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark font-bold text-xl rounded-sm hover:opacity-90 transition-opacity flex items-center justify-center"
           aria-label="Next project"
         >
           →

@@ -32,15 +32,15 @@ const Skills = () => {
       whileInView="visible"
       viewport={{ once: true }}
       variants={containerVariants}
-      className="bg-bg2 dark:bg-bg2-dark border border-borderMuted dark:border-borderMuted rounded-xl p-6 shadow-lg"
+      className="bg-bg2 dark:bg-bg2-dark border border-borderMuted dark:border-borderMuted rounded-sm p-6"
     >
-      <h3 className="text-2xl font-bold text-primary dark:text-primary-dark mb-6">My Skills</h3>
+      <h3 className="text-2xl font-bold text-primary dark:text-primary-dark mb-6 border-l-4 border-primary dark:border-primary-dark pl-4">My Skills</h3>
       <ul className="flex flex-wrap gap-3">
         {skills.map((skill) => (
           <motion.li
             key={skill}
             variants={itemVariants}
-            className="px-4 py-2 bg-bg dark:bg-bg-dark border border-borderMuted dark:border-borderMuted rounded-lg text-text dark:text-text-dark text-sm font-medium hover:border-primary dark:hover:border-primary transition-colors cursor-default"
+            className="px-4 py-2 bg-gradient-bg dark:bg-gradient-bg-dark border border-borderMuted dark:border-borderMuted rounded-sm text-text dark:text-text-dark text-sm font-medium hover:border-primary dark:hover:border-primary-dark transition-all cursor-default"
           >
             {skill}
           </motion.li>

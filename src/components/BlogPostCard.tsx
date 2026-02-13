@@ -16,8 +16,8 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
   const { title, slug, date } = post;
   return (
     <motion.div
-      whileHover={{ scale: 1.02, y: -4 }}
-      className="bg-bg2 dark:bg-bg2-dark border border-borderMuted dark:border-borderMuted rounded-xl p-5 shadow-lg hover:border-primary dark:hover:border-primary transition-colors"
+      whileHover={{ y: -2 }}
+      className="bg-bg2 dark:bg-bg2-dark border border-borderMuted dark:border-borderMuted rounded-sm p-5 hover:border-primary dark:hover:border-primary transition-colors"
     >
       <h3 className="text-lg font-semibold mb-2">
         <Link

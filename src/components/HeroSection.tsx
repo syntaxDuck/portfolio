@@ -53,7 +53,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative w-full min-h-[340px] flex flex-col items-center justify-center py-12 px-4 overflow-hidden">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 border border-borderMuted dark:border-borderMuted">
         <EffectComponent className="w-full h-full" />
       </div>
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary/30 via-transparent to-bg dark:to-bg-dark pointer-events-none" />
@@ -67,7 +67,7 @@ const HeroSection = () => {
         <motion.div variants={itemVariants} className="mb-2">
           <button
             onClick={handlePrev}
-            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark hover:bg-primary/10 dark:hover:bg-primary-dark/10 rounded transition-colors"
+            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark hover:bg-primary/10 dark:hover:bg-primary-dark/10 transition-colors"
             aria-label="Previous Effect"
           >
             ←
@@ -75,7 +75,7 @@ const HeroSection = () => {
           <span className="text-muted dark:text-muted-dark text-sm">{effects[currentIdx].label}</span>
           <button
             onClick={handleNext}
-            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark hover:bg-primary/10 dark:hover:bg-primary-dark/10 rounded transition-colors"
+            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark hover:bg-primary/10 dark:hover:bg-primary-dark/10 transition-colors"
             aria-label="Next Effect"
           >
             →
@@ -106,13 +106,13 @@ const HeroSection = () => {
         <motion.div variants={itemVariants} className="flex justify-center gap-4">
           <a
             href="#projects"
-            className="px-6 py-3 bg-primary dark:bg-primary-dark text-bg dark:text-bg-dark font-semibold rounded-lg hover:bg-primary/90 dark:hover:bg-primary-dark/90 transition-colors shadow-lg"
+            className="px-6 py-3 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark font-semibold rounded-sm hover:opacity-90 transition-opacity"
           >
             View Projects
           </a>
           <a
             href="#contact"
-            className="px-6 py-3 border-2 border-primary dark:border-primary-dark text-primary dark:text-primary-dark font-semibold rounded-lg hover:bg-primary dark:hover:bg-primary-dark hover:text-bg dark:hover:text-bg-dark transition-colors"
+            className="px-6 py-3 border-2 border-primary dark:border-primary-dark text-primary dark:text-primary-dark font-semibold rounded-sm hover:bg-gradient-accent dark:hover:bg-gradient-accent-dark hover:border-transparent hover:text-white dark:hover:text-bg-dark transition-all"
           >
             Contact Me
           </a>

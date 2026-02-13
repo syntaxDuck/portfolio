@@ -29,7 +29,7 @@ const CommitHistoryGraph: React.FC<CommitHistoryGraphProps> = ({ username }) => 
 
   return (
     <section className="py-12">
-      <h2 className="text-3xl font-bold text-primary dark:text-primary-dark mb-6 text-left">Commit History ({year})</h2>
+      <h2 className="text-3xl font-bold text-primary dark:text-primary-dark mb-6 text-left border-l-4 border-primary dark:border-primary-dark pl-4">Commit History ({year})</h2>
 
       <div className="mb-6">
         <label htmlFor="year-select" className="text-muted dark:text-muted-dark mr-2">Year:</label>
@@ -37,7 +37,7 @@ const CommitHistoryGraph: React.FC<CommitHistoryGraphProps> = ({ username }) => 
           id="year-select"
           value={year}
           onChange={e => setYear(Number(e.target.value))}
-          className="bg-bg2 dark:bg-bg2-dark text-text dark:text-text-dark border border-borderMuted dark:border-borderMuted rounded-lg px-3 py-2 focus:outline-none focus:border-primary dark:focus:border-primary"
+          className="bg-bg2 dark:bg-bg2-dark text-text dark:text-text-dark border border-borderMuted dark:border-borderMuted rounded-sm px-3 py-2 focus:outline-none focus:border-primary dark:focus:border-primary"
         >
           {availableYears.map(y => (
             <option key={y} value={y}>{y}</option>

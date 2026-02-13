@@ -9,13 +9,13 @@ const Home = () => {
   return (
     <div id="projects">
       <HeroSection />
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto divide-y divide-borderMuted dark:divide-borderMuted">
         <GithubProjects />
-        <div id="skills" className="my-12">
+        <div id="skills" className="py-12">
           <Skills />
         </div>
         <CommitHistoryGraph />
-        <div id="contact" className="my-12">
+        <div id="contact" className="py-12">
           <ContactForm />
         </div>
       </div>

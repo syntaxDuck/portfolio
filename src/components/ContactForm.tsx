@@ -27,9 +27,9 @@ const ContactForm = () => {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       onSubmit={handleSubmit}
-      className="bg-bg2 dark:bg-bg2-dark border border-borderMuted dark:border-borderMuted rounded-xl p-6 shadow-lg max-w-lg mx-auto"
+      className="bg-bg2 dark:bg-bg2-dark border border-borderMuted dark:border-borderMuted rounded-sm p-6 max-w-lg mx-auto"
     >
-      <h3 className="text-2xl font-bold text-primary dark:text-primary-dark mb-6">Contact Me</h3>
+      <h3 className="text-2xl font-bold text-primary dark:text-primary-dark mb-6 border-l-4 border-primary dark:border-primary-dark pl-4">Contact Me</h3>
       
       <div className="mb-4">
         <label htmlFor="name" className="block text-muted dark:text-muted-dark text-sm mb-2">
@@ -43,7 +43,7 @@ const ContactForm = () => {
           value={form.name}
           onChange={handleChange}
           required
-          className="w-full px-4 py-3 bg-bg dark:bg-bg-dark text-text dark:text-text-dark border border-borderMuted dark:border-borderMuted rounded-lg focus:outline-none focus:border-primary dark:focus:border-primary transition-colors"
+          className="w-full px-4 py-3 bg-bg dark:bg-bg-dark text-text dark:text-text-dark border border-borderMuted dark:border-borderMuted rounded-sm focus:outline-none focus:border-primary dark:focus:border-primary transition-colors"
         />
       </div>
       
@@ -59,7 +59,7 @@ const ContactForm = () => {
           value={form.email}
           onChange={handleChange}
           required
-          className="w-full px-4 py-3 bg-bg dark:bg-bg-dark text-text dark:text-text-dark border border-borderMuted dark:border-borderMuted rounded-lg focus:outline-none focus:border-primary dark:focus:border-primary transition-colors"
+          className="w-full px-4 py-3 bg-bg dark:bg-bg-dark text-text dark:text-text-dark border border-borderMuted dark:border-borderMuted rounded-sm focus:outline-none focus:border-primary dark:focus:border-primary transition-colors"
         />
       </div>
       
@@ -83,7 +83,7 @@ const ContactForm = () => {
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         type="submit"
-        className="w-full py-3 bg-primary dark:bg-primary-dark text-bg dark:text-bg-dark font-semibold rounded-lg hover:bg-primary/90 dark:hover:bg-primary-dark/90 transition-colors"
+        className="w-full py-3 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark font-semibold rounded-sm hover:opacity-90 transition-opacity"
       >
         Send
       </motion.button>

@@ -61,6 +61,15 @@ module.exports = {
       fontFamily: {
         sans: ['Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-primary': 'linear-gradient(135deg, oklch(0.4 0.1 244), oklch(0.76 0.1 64))',
+        'gradient-primary-dark': 'linear-gradient(135deg, oklch(0.76 0.1 244), oklch(0.76 0.1 64))',
+        'gradient-accent': 'linear-gradient(135deg, oklch(0.4 0.1 64), oklch(0.4 0.1 244))',
+        'gradient-accent-dark': 'linear-gradient(135deg, oklch(0.76 0.1 64), oklch(0.76 0.1 244))',
+        'gradient-bg': 'linear-gradient(180deg, oklch(0.96 0 244), oklch(0.92 0 244))',
+        'gradient-bg-dark': 'linear-gradient(180deg, oklch(0.1 0 244), oklch(0.15 0 244))',
+      },
     },
   },
   plugins: [],
