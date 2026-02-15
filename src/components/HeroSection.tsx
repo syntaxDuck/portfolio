@@ -52,11 +52,11 @@ const HeroSection = () => {
   const EffectComponent = effects[currentIdx].component;
 
   return (
-    <section className="relative w-full min-h-[340px] flex flex-col items-center justify-center py-12 px-4 overflow-hidden">
+    <section className="relative w-full min-h-[340px] flex flex-col items-center justify-center py-12 px-4 overflow-hidden bg-bg dark:bg-bg-dark">
       <div className="absolute inset-0 z-0 border border-borderMuted dark:border-borderMuted">
         <EffectComponent className="w-full h-full" />
       </div>
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary/30 via-transparent to-bg dark:to-bg-dark pointer-events-none" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary/30 via-transparent to-bg-dark pointer-events-none" />
       
       <motion.div
         initial="hidden"
@@ -67,15 +67,15 @@ const HeroSection = () => {
         <motion.div variants={itemVariants} className="mb-2">
           <button
             onClick={handlePrev}
-            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark font-mono text-sm hover:bg-primary/10 dark:hover:bg-primary-dark/10 transition-colors"
+            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark text-sm hover:bg-primary/10 dark:hover:bg-primary-dark/10 transition-colors"
             aria-label="Previous Effect"
           >
             ←
           </button>
-          <span className="text-muted dark:text-muted-dark text-sm font-mono">{effects[currentIdx].label}</span>
+          <span className="text-muted dark:text-muted-dark text-sm">{effects[currentIdx].label}</span>
           <button
             onClick={handleNext}
-            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark font-mono text-sm hover:bg-primary/10 dark:hover:bg-primary-dark/10 transition-colors"
+            className="mx-4 px-3 py-1 text-primary dark:text-primary-dark text-sm hover:bg-primary/10 dark:hover:bg-primary-dark/10 transition-colors"
             aria-label="Next Effect"
           >
             →
@@ -84,14 +84,14 @@ const HeroSection = () => {
 
         <motion.h1
           variants={itemVariants}
-          className="text-4xl md:text-5xl font-bold text-text dark:text-text-dark mb-4 tracking-tight font-mono"
+          className="text-4xl md:text-5xl font-bold text-text dark:text-text-dark mb-4 tracking-tight"
         >
           Hi, I'm Kameron Comer
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
-          className="text-xl md:text-2xl text-secondary dark:text-secondary-dark font-mono mb-5"
+          className="text-xl md:text-2xl text-secondary dark:text-secondary-dark mb-5"
         >
           Software Engineer & Full Stack Developer
         </motion.p>
@@ -106,13 +106,13 @@ const HeroSection = () => {
         <motion.div variants={itemVariants} className="flex justify-center gap-4">
           <a
             href="#projects"
-            className="px-6 py-3 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark font-mono text-sm font-medium rounded-sm hover:opacity-90 transition-opacity"
+            className="px-6 py-3 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark text-sm font-medium rounded-sm hover:opacity-90 transition-opacity"
           >
             View Projects
           </a>
           <a
             href="#contact"
-            className="px-6 py-3 border-2 border-primary dark:border-primary-dark text-primary dark:text-primary-dark font-mono text-sm font-medium rounded-sm hover:bg-gradient-accent dark:hover:bg-gradient-accent-dark hover:border-transparent hover:text-white dark:hover:text-bg-dark transition-all"
+            className="px-6 py-3 border-2 border-primary dark:border-primary-dark text-primary dark:text-primary-dark text-sm font-medium rounded-sm hover:bg-gradient-accent dark:hover:bg-gradient-accent-dark hover:border-transparent hover:text-white dark:hover:text-bg-dark transition-all"
           >
             Contact Me
           </a>

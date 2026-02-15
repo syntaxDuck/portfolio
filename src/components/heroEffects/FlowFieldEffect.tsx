@@ -29,20 +29,20 @@ class Perlin {
   }
 
   noise(xin: number, yin: number): number {
-    let X = Math.floor(xin) & 255;
-    let Y = Math.floor(yin) & 255;
-    let x = xin - Math.floor(xin);
-    let y = yin - Math.floor(yin);
-    let gi00 = this.perm[X + this.perm[Y]] % 12;
-    let gi01 = this.perm[X + this.perm[Y + 1]] % 12;
-    let gi10 = this.perm[X + 1 + this.perm[Y]] % 12;
-    let gi11 = this.perm[X + 1 + this.perm[Y + 1]] % 12;
-    let n00 = this.dot(this.grad3[gi00], x, y);
-    let n10 = this.dot(this.grad3[gi10], x - 1, y);
-    let n01 = this.dot(this.grad3[gi01], x, y - 1);
-    let n11 = this.dot(this.grad3[gi11], x - 1, y - 1);
-    let u = this.fade(x);
-    let v = this.fade(y);
+    const X = Math.floor(xin) & 255;
+    const Y = Math.floor(yin) & 255;
+    const x = xin - Math.floor(xin);
+    const y = yin - Math.floor(yin);
+    const gi00 = this.perm[X + this.perm[Y]] % 12;
+    const gi01 = this.perm[X + this.perm[Y + 1]] % 12;
+    const gi10 = this.perm[X + 1 + this.perm[Y]] % 12;
+    const gi11 = this.perm[X + 1 + this.perm[Y + 1]] % 12;
+    const n00 = this.dot(this.grad3[gi00], x, y);
+    const n10 = this.dot(this.grad3[gi10], x - 1, y);
+    const n01 = this.dot(this.grad3[gi01], x, y - 1);
+    const n11 = this.dot(this.grad3[gi11], x - 1, y - 1);
+    const u = this.fade(x);
+    const v = this.fade(y);
     return this.lerp(
       this.lerp(n00, n10, u),
       this.lerp(n01, n11, u),

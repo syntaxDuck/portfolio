@@ -52,12 +52,12 @@ const GithubProjects: React.FC<GithubProjectsProps> = ({ username }) => {
 
   return (
     <section className="py-12">
-      <h2 className="text-3xl font-bold text-primary dark:text-primary-dark mb-8 text-left border-l-4 border-primary dark:border-primary-dark pl-4 font-mono">GitHub Projects</h2>
+      <h2 className="text-3xl font-bold text-primary dark:text-primary-dark mb-8 text-left border-l-4 border-primary dark:border-primary-dark pl-4">GitHub Projects</h2>
 
       <div className="relative flex items-center justify-center gap-4 min-h-[320px]">
         <button
           onClick={handlePrev}
-          className="z-20 w-12 h-12 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark font-mono text-lg rounded-sm hover:opacity-90 transition-opacity flex items-center justify-center"
+          className="z-20 w-12 h-12 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark text-lg rounded-sm hover:opacity-90 transition-opacity flex items-center justify-center"
           aria-label="Previous project"
         >
           ←
@@ -85,12 +85,12 @@ const GithubProjects: React.FC<GithubProjectsProps> = ({ username }) => {
                 className="flex-1 min-w-0 max-w-sm bg-bg2 dark:bg-bg2-dark text-text dark:text-text-dark rounded-sm p-5 border border-borderMuted dark:border-borderMuted hover:border-primary dark:hover:border-primary transition-colors flex flex-col justify-between"
               >
                 <div>
-                  <h3 className="text-lg font-semibold text-primary dark:text-primary-dark mb-2 font-mono">{repo.name}</h3>
-                  <p className="text-muted dark:text-muted-dark text-sm mb-4 font-mono">
+                  <h3 className="text-lg font-semibold text-primary dark:text-primary-dark mb-2">{repo.name}</h3>
+                  <p className="text-muted dark:text-muted-dark text-sm mb-4">
                     {repo.description || 'No description provided.'}
                   </p>
                 </div>
-                <div className="flex gap-4 text-sm text-primary dark:text-primary-dark font-mono">
+                <div className="flex gap-4 text-sm text-primary dark:text-primary-dark">
                   <span>★ {repo.stargazers_count}</span>
                   <span>Forks: {repo.forks_count}</span>
                 </div>
@@ -101,7 +101,7 @@ const GithubProjects: React.FC<GithubProjectsProps> = ({ username }) => {
 
         <button
           onClick={handleNext}
-          className="z-20 w-12 h-12 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark font-mono text-lg rounded-sm hover:opacity-90 transition-opacity flex items-center justify-center"
+          className="z-20 w-12 h-12 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark text-lg rounded-sm hover:opacity-90 transition-opacity flex items-center justify-center"
           aria-label="Next project"
         >
           →

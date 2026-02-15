@@ -75,7 +75,7 @@ const ContactForm = () => {
           onChange={handleChange}
           required
           rows={4}
-          className="w-full px-4 py-3 bg-bg dark:bg-bg-dark text-text dark:text-text-dark border border-borderMuted dark:border-borderMuted rounded-lg focus:outline-none focus:border-primary dark:focus:border-primary transition-colors resize-none"
+          className="w-full px-4 py-3 bg-bg dark:bg-bg-dark text-text dark:text-text-dark border border-borderMuted dark:border-borderMuted rounded-sm focus:outline-none focus:border-primary dark:focus:border-primary transition-colors resize-none"
         />
       </div>
       
@@ -83,7 +83,7 @@ const ContactForm = () => {
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         type="submit"
-        className="w-full py-3 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark font-semibold rounded-sm hover:opacity-90 transition-opacity"
+        className="w-full py-3 bg-gradient-primary dark:bg-gradient-primary-dark text-white dark:text-bg-dark text-sm font-medium rounded-sm hover:opacity-90 transition-opacity"
       >
         Send
       </motion.button>
