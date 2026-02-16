@@ -30,14 +30,28 @@ export const bootSequence: BootLine[] = [
   { text: 'Type "help" for available commands.', delay: 6600, type: 'info' },
 ];
 
-export const asciiBanner = `
-██████╗ ███████╗███████╗██╗     ██╗███╗   ██╗███████╗
-██╔══██╗██╔════╝██╔════╝██║     ██║████╗  ██║██╔════╝
-██████╔╝█████╗  █████╗  ██║     ██║██╔██╗ ██║█████╗  
-██╔══██╗██╔══╝  ██╔══╝  ██║     ██║██║╚██╗██║██╔══╝  
-██║  ██║███████╗███████╗███████╗██║██║ ╚████║███████╗
-╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝
-`;
+export const asciiBanner = `██╗  ██╗ █████╗ ███╗   ███╗███████╗██████╗  ██████╗ ███╗   ██╗
+██║ ██╔╝██╔══██╗████╗ ████║██╔════╝██╔══██╗██╔═══██╗████╗  ██║
+█████╔╝ ███████║██╔████╔██║█████╗  ██████╔╝██║   ██║██╔██╗ ██║
+██╔═██╗ ██╔══██║██║╚██╔╝██║██╔══╝  ██╔══██╗██║   ██║██║╚██╗██║
+██║  ██╗██║  ██║██║ ╚═╝ ██║███████╗██║  ██║╚██████╔╝██║ ╚████║
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+                                                          
+ ██████╗ ██████╗ ███╗   ███╗███████╗██████╗                   
+██╔════╝██╔═══██╗████╗ ████║██╔════╝██╔══██╗                  
+██║     ██║   ██║██╔████╔██║█████╗  ██████╔╝                  
+██║     ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗                  
+╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║                  
+ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝`;
+
+export const aboutContent: string[] = [
+  '',
+  'Full-Stack Developer | Austin, TX',
+  '',
+  'Type "help" for commands or scroll down to explore.',
+  '',
+  '↓ Scroll to explore',
+];
 
 export const defaultTerminalState: TerminalState = {
   bootLines: [],
@@ -61,6 +75,18 @@ export const defaultTerminalState: TerminalState = {
   setCmdHistoryIdx: () => { },
   setCurrentEffect: () => { },
   setMinimizedEffect: () => { },
+  rebootTerminal: () => { },
+}
+
+export type BootLineType = 'info' | 'success' | 'error' | 'input';
+
+export function getLineColor(type: BootLineType): string {
+  switch (type) {
+    case 'success': return 'text-success';
+    case 'error': return 'text-danger';
+    case 'input': return 'text-primary dark:text-primary-dark';
+    default: return 'text-text dark:text-text-dark';
+  }
 }
 
 export interface TerminalState {
@@ -85,4 +111,5 @@ export interface TerminalState {
   setCmdHistoryIdx: (val: number) => void;
   setCurrentEffect: (val: EffectKey | null) => void,
   setMinimizedEffect: (val: EffectKey | null) => void,
+  rebootTerminal: () => void,
 }

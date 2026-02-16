@@ -3,9 +3,10 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 import TerminalHeader from './TerminalHeader';
 import TerminalInput from './TerminalInput';
-import { TerminalContext } from '../../context/terminal/TerminalContex';
+import { TerminalContext } from '../../context/terminal/TerminalContext';
 import { Effects } from '../procedural-effects/types';
 import TerminalOutput from './TerminalOutput';
+import { useBodyScroll } from '../../hooks/useBodyScroll';
 
 const TerminalWrapper: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -14,13 +15,7 @@ const TerminalWrapper: React.FC = () => {
 
   const termCtx = useContext(TerminalContext)
 
-
-  useEffect(() => {
-    if (!termCtx.isMinimized)
-      document.body.style.overflow = 'hidden';
-    if (termCtx.isMinimized)
-      document.body.style.overflow = 'auto';
-  }, [termCtx.isMinimized]);
+  useBodyScroll(!termCtx.isMinimized)
 
   useEffect(() => {
     if (termCtx.isReady && inputRef.current && !termCtx.isMinimized) {
@@ -29,10 +24,10 @@ const TerminalWrapper: React.FC = () => {
   }, [termCtx.isReady, termCtx.isMinimized]);
 
   useEffect(() => {
-    if (outputRef.current) {
-      outputRef.current.scrollTop = outputRef.current.scrollHeight;
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
-  }, [termCtx.outputBuff]);
+  }, [termCtx.outputBuff, termCtx.inputBuff]);
 
   const handleTerminalClick = () => {
     if (inputRef.current) {
@@ -46,25 +41,20 @@ const TerminalWrapper: React.FC = () => {
     termCtx.setIsMinimized(!termCtx.isMinimized);
   };
 
-  const termCompound = {
-    minimized: "relative overflow-hidden border border-borderMuted dark:border-borderMuted bg-bg-dark dark:bg-bg-dark",
-    maximized: "absolute inset-0 bg-bg-dark dark:bg-bg-dark overflow-hidden border border-borderMuted dark:border-borderMuted"
-  }
-
   const termVariants: Variants = {
-    minimize: { scale: 0.9 },
-    maximize: { height: '100vh', width: '100vw' }
+    minimize: { scale: 0.95 },
+    maximize: { height: '100%', width: '100%' }
   }
 
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full h-screen">
       <AnimatePresence mode="wait">
         <motion.div
           variants={termVariants}
           initial="maximize"
           animate={termCtx.isMinimized ? "minimize" : "maximized"}
           transition={{ duration: 1, ease: 'linear' }}
-          className={false ? termCompound.minimized : termCompound.maximized}
+          className={`absolute inset-0 bg-bg-dark dark:bg-bg-dark overflow-hidden border border-borderMuted dark:border-borderMuted ${termCtx.isMinimized ? 'h-[60vh]' : 'h-screen'}`}
         >
           <div className="absolute inset-0 z-0">
             {EffectComponent && (
@@ -77,7 +67,7 @@ const TerminalWrapper: React.FC = () => {
             <div
               ref={terminalRef}
               onClick={handleTerminalClick}
-              className="flex-1 p-4 font-mono text-sm overflow-y-auto"
+              className="flex-1 p-2 md:p-4 font-mono text-sm overflow-y-auto"
             >
               <TerminalOutput outputRef={outputRef} />
               <TerminalInput inputRef={inputRef} onMinimize={handleMinimize} />

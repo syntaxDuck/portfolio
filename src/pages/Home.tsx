@@ -3,6 +3,7 @@ import Skills from '../components/Skills';
 import ContactForm from '../components/ContactForm';
 import GithubProjects from '../components/GithubProjects';
 import CommitHistoryGraph from '../components/CommitHistoryGraph';
+import ExperienceTimeline from '../components/ExperienceTimeline';
 import Terminal from '../components/terminal/Terminal';
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
     <div id="projects">
       <Terminal />
       <div className="max-w-6xl mx-auto divide-y divide-borderMuted dark:divide-borderMuted">
+        <ExperienceTimeline />
         <GithubProjects />
         <div id="skills" className="py-12">
           <Skills />

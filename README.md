@@ -1,73 +1,113 @@
-# React + TypeScript + Vite
+# Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal portfolio website built with React, TypeScript, Vite, and Tailwind CSS. Features an industrial/technical aesthetic with interactive elements including a terminal emulator, GitHub integration, and blog capabilities.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**: React 19, TypeScript, Vite
+- **Styling**: Tailwind CSS
+- **Routing**: React Router DOM
+- **Animation**: Framer Motion
+- **Markdown**: React Markdown, React Syntax Highlighter
+- **Diagrams**: Mermaid
+- **HTTP**: Axios
 
-## React Compiler
+## Project Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/       # Reusable UI components
+│   ├── ui/          # Navbar, Footer
+│   └── *.tsx        # Feature components
+├── context/         # React context providers (Terminal)
+├── hooks/           # Custom React hooks
+├── pages/           # Route page components
+│   ├── Home.tsx
+│   ├── Projects.tsx
+│   ├── Blog.tsx
+│   ├── About.tsx
+│   ├── Playground.tsx
+│   └── demos/       # Interactive demo pages
+├── services/        # API services (GitHub)
+├── types/           # TypeScript definitions
+└── index.css        # Global styles
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js 18+
+- pnpm (recommended)
+
+### Installation
+
+```bash
+pnpm install
 ```
+
+### Development
+
+```bash
+pnpm dev
+```
+
+Runs the development server at http://localhost:3000
+
+### Build
+
+```bash
+pnpm build
+```
+
+Runs TypeScript check and creates production build
+
+### Preview
+
+```bash
+pnpm preview
+```
+
+Preview the production build locally
+
+## Features
+
+- **Dark/Light Mode**: Toggle between themes
+- **GitHub Integration**: Fetch and display GitHub repositories and activity
+- **Blog**: Markdown-based blog posts with syntax highlighting
+- **Interactive Terminal**: Terminal emulator component for demos
+- **Animated Transitions**: Smooth page transitions with Framer Motion
+
+## Environment Variables
+
+Create a `.env` file (do NOT commit):
+
+```env
+VITE_GITHUB_USERNAME=your-username
+VITE_LINKEDIN_USERNAME=your-username
+```
+
+## Available Routes
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home page with hero section |
+| `/projects` | GitHub projects showcase |
+| `/blog` | Blog posts |
+| `/blog/:slug` | Single blog post |
+| `/about` | About page with experience timeline |
+| `/dev/playground` | Playground with various demos |
+| `/demo/terminal` | Terminal emulator demo |
+| `/demo/github-activity` | GitHub activity visualization |
+| `/demo/code-playground` | Interactive code playground |
+| `/demo/ascii-art` | ASCII art generator |
+| `/demo/achievements` | Achievements showcase |
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Build for production |
+| `pnpm preview` | Preview production build |
+| `pnpm lint` | Run ESLint |

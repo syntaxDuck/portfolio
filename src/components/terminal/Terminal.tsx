@@ -1,11 +1,10 @@
 import React from "react";
-import TerminalContextProvider from "../../context/terminal/TerminalContextProvider";
 import TerminalWrapper from "./TerminalWrapper";
 
 
 const Terminal: React.FC = () => {
 
-  return (<TerminalContextProvider><TerminalWrapper /></TerminalContextProvider>)
+  return <TerminalWrapper />
 }
 
 export default Terminal;

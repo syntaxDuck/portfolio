@@ -1,7 +1,7 @@
 import React, { Ref, useContext } from "react"
 import { motion } from "framer-motion"
-import { TerminalContext } from "../../context/terminal/TerminalContex"
-import { BootLine, asciiBanner } from "./types"
+import { TerminalContext } from "../../context/terminal/TerminalContext"
+import { asciiBanner, getLineColor } from "./types"
 
 interface TerminalOutputProps {
   outputRef: Ref<HTMLDivElement | null>
@@ -9,15 +9,6 @@ interface TerminalOutputProps {
 
 const TerminalOutput: React.FC<TerminalOutputProps> = ({ outputRef }) => {
   const termCtx = useContext(TerminalContext);
-
-  const getLineColor = (type: BootLine['type']) => {
-    switch (type) {
-      case 'success': return 'text-success';
-      case 'error': return 'text-danger';
-      case 'input': return 'text-primary dark:text-primary-dark';
-      default: return 'text-text dark:text-text-dark';
-    }
-  };
 
   return (
     <>
@@ -45,7 +36,7 @@ const TerminalOutput: React.FC<TerminalOutputProps> = ({ outputRef }) => {
           </div>
         ) : (
           <div ref={outputRef} className="space-y-1 mb-2">
-            <div className="text-success mb-4 whitespace-pre-wrap">{asciiBanner}</div>
+            <div className="text-success mb-4 whitespace-pre text-[8px] xs:text-[10px] md:text-sm lg:text-base overflow-x-auto">{asciiBanner}</div>
             {termCtx.outputBuff.map((line, i) => (
               <div key={i} className="text-text dark:text-text-dark whitespace-pre-wrap">{line}</div>
             ))}

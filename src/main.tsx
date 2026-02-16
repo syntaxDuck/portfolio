@@ -16,6 +16,7 @@ import GitHubActivityPage from "./pages/demos/GitHubActivityPage";
 import CodePlaygroundPage from "./pages/demos/CodePlaygroundPage";
 import AsciiArtPage from "./pages/demos/AsciiArtPage";
 import AchievementsPage from "./pages/demos/AchievementsPage";
+import TerminalContextProvider from "./context/terminal/TerminalContextProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 const rootElement = document.getElementById("root");
@@ -26,25 +27,27 @@ if (!rootElement) {
 createRoot(rootElement).render(
   <BrowserRouter>
     <StrictMode>
-      <div className="min-h-screen flex flex-col bg-bg">
-        <Navbar />
-        <main className="flex-1 p-5 md:p-8 bg-bg dark:bg-bg2-dark">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<SinglePost />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/dev/playground" element={<Playground />} />
-            <Route path="/demo/terminal" element={<TerminalPage />} />
-            <Route path="/demo/github-activity" element={<GitHubActivityPage />} />
-            <Route path="/demo/code-playground" element={<CodePlaygroundPage />} />
-            <Route path="/demo/ascii-art" element={<AsciiArtPage />} />
-            <Route path="/demo/achievements" element={<AchievementsPage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <TerminalContextProvider>
+        <div className="min-h-screen flex flex-col bg-bg">
+          <Navbar />
+          <main className="flex-1 p-3 md:p-8 bg-bg dark:bg-bg2-dark">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<SinglePost />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/dev/playground" element={<Playground />} />
+              <Route path="/demo/terminal" element={<TerminalPage />} />
+              <Route path="/demo/github-activity" element={<GitHubActivityPage />} />
+              <Route path="/demo/code-playground" element={<CodePlaygroundPage />} />
+              <Route path="/demo/ascii-art" element={<AsciiArtPage />} />
+              <Route path="/demo/achievements" element={<AchievementsPage />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </TerminalContextProvider>
     </StrictMode>
   </BrowserRouter>
 )
