@@ -34,6 +34,27 @@ export const fetchGithubRepos = async (
   }
 };
 
+export const fetchGithubReadme = async (
+  username: string,
+  repo: string
+): Promise<string | null> => {
+  try {
+    const headers: Record<string, string> = {};
+    const token = getGithubToken();
+    if (token) headers["Authorization"] = `token ${token}`;
+
+    const response = await axios.get(
+      `${GITHUB_API_BASE_URL}/repos/${username}/${repo}/readme`,
+      { headers }
+    );
+
+    return atob(response.data.content);
+  } catch (error) {
+    console.error("Error fetching README:", error);
+    return null;
+  }
+};
+
 export const fetchGithubCommitHistory = async (
   username: string = import.meta.env.VITE_GITHUB_USERNAME || '',
   year: number = new Date().getFullYear()
