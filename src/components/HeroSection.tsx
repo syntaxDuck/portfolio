@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import GameOfLifeEffect from './heroEffects/GameOfLifeEffect';
-import FlowFieldEffect from './heroEffects/FlowFieldEffect';
-import LissajousEffect from './heroEffects/LissajousEffect';
-import BoidsEffect from './heroEffects/BoidsEffect';
+import GameOfLifeEffect from './procedural-effects/GameOfLifeEffect';
+import FlowFieldEffect from './procedural-effects/FlowFieldEffect';
+import LissajousEffect from './procedural-effects/LissajousEffect';
+import BoidsEffect from './procedural-effects/BoidsEffect';
 
 type EffectKey = 'life' | 'flow' | 'lissajous' | 'boids';
 

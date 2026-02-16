@@ -3,14 +3,14 @@ import "./index.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import Navbar from "./components/Navbar";
+import Navbar from "./components/ui/Navbar";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import SinglePost from "./pages/SinglePost";
 import Blog from "./pages/Blog";
 import About from "./pages/About";
 import Playground from "./pages/Playground";
-import Footer from "./components/Footer";
+import Footer from "./components/ui/Footer";
 import TerminalPage from "./pages/demos/TerminalPage";
 import GitHubActivityPage from "./pages/demos/GitHubActivityPage";
 import CodePlaygroundPage from "./pages/demos/CodePlaygroundPage";

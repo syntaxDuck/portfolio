@@ -3,13 +3,12 @@ import Skills from '../components/Skills';
 import ContactForm from '../components/ContactForm';
 import GithubProjects from '../components/GithubProjects';
 import CommitHistoryGraph from '../components/CommitHistoryGraph';
-import HeroSection from '../components/HeroSection';
-import About from '../components/About';
+import Terminal from '../components/terminal/Terminal';
 
 const Home = () => {
   return (
     <div id="projects">
-      <HeroSection />
+      <Terminal />
       <div className="max-w-6xl mx-auto divide-y divide-borderMuted dark:divide-borderMuted">
         <GithubProjects />
         <div id="skills" className="py-12">
