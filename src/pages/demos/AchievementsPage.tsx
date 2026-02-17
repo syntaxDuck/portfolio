@@ -10,6 +10,14 @@ interface Achievement {
   earnedDate?: string;
 }
 
+interface GitHubRepo {
+  stargazers_count: number;
+}
+
+interface GitHubEvent {
+  type: string;
+}
+
 const GITHUB_USERNAME = 'syntaxDuck';
 
 const allAchievements: Omit<Achievement, 'earned' | 'earnedDate'>[] = [
@@ -48,15 +56,15 @@ const AchievementsPage: React.FC = () => {
         const reposData = await reposRes.json();
         const eventsData = await eventsRes.json();
 
-        const totalStars = reposData.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0);
+        const totalStars = reposData.reduce((acc: number, repo: GitHubRepo) => acc + repo.stargazers_count, 0);
         
-        const pushEvents = eventsData.filter((e: any) => e.type === 'PushEvent').length;
+        const pushEvents = eventsData.filter((e: GitHubEvent) => e.type === 'PushEvent').length;
 
         setStats({
           totalRepos: userData.public_repos || 0,
           totalStars,
           totalCommits: pushEvents,
-          totalPRs: eventsData.filter((e: any) => e.type === 'PullRequestEvent').length,
+          totalPRs: eventsData.filter((e: GitHubEvent) => e.type === 'PullRequestEvent').length,
         });
 
         const earnedAchievements: Achievement[] = allAchievements.map(ach => {

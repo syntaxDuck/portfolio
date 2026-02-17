@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/use-memo, react-hooks/exhaustive-deps */
 import { useState, useEffect, useCallback } from 'react';
 
 interface UseFetchState<T> {

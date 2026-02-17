@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ActivityEvent {
@@ -7,6 +7,22 @@ interface ActivityEvent {
   repo: string;
   description: string;
   timestamp: string;
+}
+
+interface GitHubEvent {
+  id: string;
+  type: string;
+  repo: { name: string };
+  created_at: string;
+  payload: {
+    commits?: { length: number }[];
+    action?: string;
+    pull_request?: { number: number; title: string };
+    issue?: { number: number; title: string };
+    ref_type?: string;
+    ref?: string;
+    master_branch?: string;
+  };
 }
 
 const GITHUB_USERNAME = 'syntaxDuck';
@@ -23,19 +39,44 @@ const eventTypeLabels: Record<string, { label: string; color: string }> = {
   IssueCommentEvent: { label: 'COMMENT', color: 'text-muted' },
 };
 
+function getEventDescription(event: GitHubEvent): string {
+  switch (event.type) {
+    case 'PushEvent': {
+      const commitCount = event.payload.commits?.length || 0;
+      return `Pushed ${commitCount} commit${commitCount !== 1 ? 's' : ''}`;
+    }
+    case 'PullRequestEvent':
+      return `${event.payload.action} PR #${event.payload.pull_request?.number}: ${event.payload.pull_request?.title}`;
+    case 'IssuesEvent':
+      return `${event.payload.action} issue #${event.payload.issue?.number}: ${event.payload.issue?.title}`;
+    case 'WatchEvent':
+      return 'Starred a repository';
+    case 'ForkEvent':
+      return 'Forked a repository';
+    case 'CreateEvent':
+      return `Created ${event.payload.ref_type}: ${event.payload.ref || event.payload.master_branch}`;
+    case 'PullRequestReviewEvent':
+      return `Reviewed PR #${event.payload.pull_request?.number}`;
+    case 'IssueCommentEvent':
+      return `Commented on issue #${event.payload.issue?.number}`;
+    default:
+      return event.type;
+  }
+}
+
 const GitHubActivityPage: React.FC = () => {
   const [activities, setActivities] = useState<ActivityEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
-  const fetchActivities = async () => {
+  const fetchActivities = useCallback(async () => {
     try {
       const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events?per_page=20`);
       if (!response.ok) throw new Error('Failed to fetch');
       
       const data = await response.json();
-      const parsed: ActivityEvent[] = data.map((event: any) => ({
-        id: event.id,
+      const parsed: ActivityEvent[] = data.map((event: GitHubEvent) => ({
+        id: Number(event.id),
         type: event.type,
         repo: event.repo.name,
         description: getEventDescription(event),
@@ -49,37 +90,13 @@ const GitHubActivityPage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const getEventDescription = (event: any): string => {
-    switch (event.type) {
-      case 'PushEvent':
-        const commitCount = event.payload.commits?.length || 0;
-        return `Pushed ${commitCount} commit${commitCount !== 1 ? 's' : ''}`;
-      case 'PullRequestEvent':
-        return `${event.payload.action} PR #${event.payload.pull_request.number}: ${event.payload.pull_request.title}`;
-      case 'IssuesEvent':
-        return `${event.payload.action} issue #${event.payload.issue.number}: ${event.payload.issue.title}`;
-      case 'WatchEvent':
-        return 'Starred a repository';
-      case 'ForkEvent':
-        return 'Forked a repository';
-      case 'CreateEvent':
-        return `Created ${event.payload.ref_type}: ${event.payload.ref || event.payload.master_branch}`;
-      case 'PullRequestReviewEvent':
-        return `Reviewed PR #${event.payload.pull_request.number}`;
-      case 'IssueCommentEvent':
-        return `Commented on issue #${event.payload.issue.number}`;
-      default:
-        return event.type;
-    }
-  };
+  }, []);
 
   useEffect(() => {
     fetchActivities();
     const interval = setInterval(fetchActivities, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchActivities]);
 
   return (
     <div className="max-w-4xl mx-auto py-12">

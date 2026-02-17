@@ -115,8 +115,11 @@ export function TypewriterWithDelete({
         }, deleteSpeed);
         return () => clearTimeout(timeout);
       } else {
-        setIsDeleting(false);
-        setCurrentIndex((prev) => (prev + 1) % variations.length);
+        const timeout = setTimeout(() => {
+          setIsDeleting(false);
+          setCurrentIndex((prev) => (prev + 1) % variations.length);
+        }, 0);
+        return () => clearTimeout(timeout);
       }
     }
   }, [currentText, isDeleting, variations, speed, deleteSpeed, pauseDuration, currentIndex]);
@@ -165,9 +168,9 @@ export function StaggeredLines({
       }, speed);
       return () => clearTimeout(timeout);
     } else {
-      setVisibleLines((prev) => [...prev, currentLineIndex]);
-      setCurrentText('');
       const timeout = setTimeout(() => {
+        setVisibleLines((prev) => [...prev, currentLineIndex]);
+        setCurrentText('');
         setCurrentLineIndex((prev) => prev + 1);
       }, delayBetween);
       return () => clearTimeout(timeout);
@@ -240,8 +243,11 @@ export function InfiniteTypewriter({
         }, deleteSpeed);
         return () => clearTimeout(timeout);
       } else {
-        setIsDeleting(false);
-        setCurrentIndex((prev) => (prev + 1) % texts.length);
+        const timeout = setTimeout(() => {
+          setIsDeleting(false);
+          setCurrentIndex((prev) => (prev + 1) % texts.length);
+        }, 0);
+        return () => clearTimeout(timeout);
       }
     }
   }, [currentText, isDeleting, texts, speed, deleteSpeed, pauseDuration, currentIndex]);

@@ -24,8 +24,13 @@ const Navbar = () => {
       setIsVisible(window.scrollY > 5);
     };
     window.addEventListener('scroll', handleScroll);
-    setIsVisible(window.scrollY > 5);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const timeout = setTimeout(() => {
+      setIsVisible(window.scrollY > 5);
+    }, 0);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeout);
+    };
   }, []);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);

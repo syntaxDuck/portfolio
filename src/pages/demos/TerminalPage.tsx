@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface Command {
-  name: string;
-  description: string;
-  action: () => void;
-}
-
 const TerminalPage: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');

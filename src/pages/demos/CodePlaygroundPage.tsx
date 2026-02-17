@@ -1,11 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 
-interface CodeRunResult {
-  output: string;
-  error?: string;
-}
-
 const CodePlaygroundPage: React.FC = () => {
   const [code, setCode] = useState(`// Welcome to the Code Playground
 // Write JavaScript and run it in your browser
@@ -40,15 +35,15 @@ console.log(JSON.stringify(user, null, 2));
     setTimeout(() => {
       const logs: string[] = [];
       const mockConsole = {
-        log: (...args: any[]) => {
+        log: (...args: unknown[]) => {
           logs.push(args.map(arg => 
             typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
           ).join(' '));
         },
-        error: (...args: any[]) => {
+        error: (...args: unknown[]) => {
           logs.push(`Error: ${args.join(' ')}`);
         },
-        warn: (...args: any[]) => {
+        warn: (...args: unknown[]) => {
           logs.push(`Warning: ${args.join(' ')}`);
         },
       };
@@ -57,8 +52,9 @@ console.log(JSON.stringify(user, null, 2));
         const fn = new Function('console', code);
         fn(mockConsole);
         setOutput(logs.length > 0 ? logs : ['No output']);
-      } catch (error: any) {
-        setOutput([`Error: ${error.message}`]);
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : String(error);
+        setOutput([`Error: ${message}`]);
       }
 
       setIsRunning(false);

@@ -1,19 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 
 const ASCII_CHARS = ' .:-=+*#%@';
 const MATRIX_CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
-
-interface AsciiArtProps {
-  mouseX: number;
-  mouseY: number;
-}
 
 const AsciiArtPage: React.FC = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeEffect, setActiveEffect] = useState<'mouse' | 'matrix' | 'wave' | 'radar'>('mouse');
   const [asciiOutput, setAsciiOutput] = useState<string[]>([]);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const WIDTH = 80;
   const HEIGHT = 30;

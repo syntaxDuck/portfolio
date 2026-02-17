@@ -21,12 +21,6 @@ function Typewriter({
   const indexRef = useRef(0);
 
   useEffect(() => {
-    setDisplayedText('');
-    setIsComplete(false);
-    indexRef.current = 0;
-  }, [text]);
-
-  useEffect(() => {
     if (isComplete) return;
 
     const interval = setInterval(() => {
@@ -53,7 +47,7 @@ function Typewriter({
   const cursorChar = cursor === 'block' ? '█' : '_';
 
   return (
-    <span className={className}>
+    <span className={className} key={text}>
       {displayedText}
       <span className="animate-pulse">{showCursor ? cursorChar : ' '}</span>
     </span>
