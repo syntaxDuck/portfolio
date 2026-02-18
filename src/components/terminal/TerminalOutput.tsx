@@ -36,9 +36,9 @@ const TerminalOutput: React.FC<TerminalOutputProps> = ({ outputRef }) => {
           </div>
         ) : (
           <div ref={outputRef} className="space-y-1 mb-2">
-            <div className="text-success mb-4 whitespace-pre text-[8px] xs:text-[10px] md:text-sm lg:text-base overflow-x-auto">{asciiBanner}</div>
+            <div className="text-white whitespace-pre">{asciiBanner}</div>
             {termCtx.outputBuff.map((line, i) => (
-              <div key={i} className="text-text dark:text-text-dark whitespace-pre-wrap">{line}</div>
+              <div key={i} className="text-white whitespace-pre-wrap">{line}</div>
             ))}
           </div>
         )

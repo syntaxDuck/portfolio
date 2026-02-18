@@ -22,7 +22,7 @@ const TerminalInput: React.FC<TerminalInputProps> = ({ inputRef, onMinimize }) =
             value={termCtx.inputBuff}
             onChange={(e) => termCtx.setInputBuff(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e, onMinimize)}
-            className="flex-1 bg-transparent border-none outline-none text-text dark:text-text-dark"
+            className="flex-1 bg-transparent border-none outline-none text-white"
             placeholder="Type a command..."
             autoFocus
           />

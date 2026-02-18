@@ -36,6 +36,25 @@ export function useTerminalCommands({ state }: UseTerminalCommandsProps) {
 
     switch (command) {
       case 'help':
+        if (args[1] === '-h' || args[1] === '--help') {
+          return `Usage: help [command]
+Options:
+  -h, --help    Show help information
+
+Available commands:
+  help        - Show this help message
+  about       - Learn about ${PortfolioConfig.name.split(' ')[0]}
+  projects    - View my projects
+  skills      - View my skills
+  contact     - Get in touch
+  github      - Open GitHub profile
+  clear       - Clear terminal
+  theme       - Toggle dark/light mode
+  effects     - List available hero effects
+  effect      - Display hero effect (life, flow, lissajous, boids, donut, cube)
+  exit        - Minimize terminal
+  whoami      - Display current user`
+        }
         return `Available commands:
   help        - Show this help message
   about       - Learn about ${PortfolioConfig.name.split(' ')[0]}
@@ -52,10 +71,10 @@ export function useTerminalCommands({ state }: UseTerminalCommandsProps) {
 
       case 'about':
         return `${PortfolioConfig.name} - ${PortfolioConfig.title}
-Based in ${PortfolioConfig.location}
-${PortfolioConfig.tagline}
-Building modern web applications with focus on performance and UX`
+Based out of ${PortfolioConfig.location}
 
+${PortfolioConfig.tagline}
+`
       case 'projects':
         window.location.href = '#projects'
         return 'Navigating to projects section...'
@@ -97,27 +116,29 @@ Usage: effect <name> [--flag=value]
 Type "effect help" for available flags`
 
       case 'effect': {
-        if (!args[1]) {
-          return `Usage: effect <name> [--flag=value]
-Type "effect help" for available flags
-
-Available effects: life, flow, lissajous, boids, donut, cube`
-        }
-
-        // Handle "effect help" or "effect donut help"
-        if (args[1] === 'help' || args[2] === 'help') {
-          const effectName = args[1] === 'help' ? args[2] : args[1];
+        // Handle help flags
+        if (args[1] === 'help' || args[1] === '-h' || args[1] === '--help' || args[2] === 'help' || args[2] === '-h' || args[2] === '--help') {
+          const effectName = (args[1] === 'help' || args[1] === '-h' || args[1] === '--help') ? args[2] : args[1];
           if (!effectName) {
             return `Usage: effect <name> [--flag=value]
-Available effects: life, flow, lissajous, boids, donut, cube`;
+Available effects: life, flow, lissajous, boids, donut, cube
+
+Type "effect <name> help" for effect-specific flags`;
           }
-          
+
           if (effectName === 'donut') {
             return `Donut effect flags:${DONUT_FLAGS}`;
           } else if (effectName === 'cube') {
             return `Cube effect flags:${CUBE_FLAGS}`;
           }
           return `No configurable flags for ${effectName}`;
+        }
+
+        if (!args[1]) {
+          return `Usage: effect <name> [--flag=value]
+Type "effect help" for available flags
+
+Available effects: life, flow, lissajous, boids, donut, cube`
         }
 
         const effectKey = args[1] as EffectKey
@@ -141,9 +162,10 @@ Available effects: life, flow, lissajous, boids, donut, cube`;
           }
         }
 
+        state.setEffectConfig({});
         state.setCurrentEffect(effectKey);
         state.setEffectConfig(config);
-        
+
         const flagCount = Object.keys(flags).length;
         if (flagCount > 0) {
           return `Loading ${Effects[effectKey].label} with ${flagCount} custom parameter(s)...`;
@@ -181,8 +203,8 @@ Available effects: life, flow, lissajous, boids, donut, cube`;
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()
       if (state.cmdHistory.length > 0) {
-        const newIndex = state.cmdHistoryIdx === -1 
-          ? state.cmdHistory.length - 1 
+        const newIndex = state.cmdHistoryIdx === -1
+          ? state.cmdHistory.length - 1
           : Math.max(0, state.cmdHistoryIdx - 1)
         state.setCmdHistoryIdx(newIndex)
         state.setInputBuff(state.cmdHistory[newIndex])

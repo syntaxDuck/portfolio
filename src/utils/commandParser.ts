@@ -22,6 +22,8 @@ export function parseCommandInput(input: string): ParsedInput {
       } else {
         flags[token.slice(2)] = 'true';
       }
+    } else if (token.startsWith('-')) {
+      flags[token.slice(1)] = 'true';
     } else {
       args.push(token);
     }
