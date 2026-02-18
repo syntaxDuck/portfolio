@@ -1,25 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 
-const navLinks = [
+interface NavItem {
+  to: string;
+  label: string;
+  children?: NavItem[];
+}
+
+interface NavbarProps {
+  isAlwaysVisible?: boolean;
+}
+
+const navLinks: NavItem[] = [
   { to: '/', label: 'Home' },
   { to: '/projects', label: 'Projects' },
   { to: '/blog', label: 'Blog' },
   { to: '/about', label: 'About' },
-  { to: '/demo/terminal', label: 'Terminal' },
-  { to: '/demo/github-activity', label: 'Activity' },
-  { to: '/demo/code-playground', label: 'Playground' },
-  { to: '/demo/ascii-art', label: 'ASCII' },
-  { to: '/demo/achievements', label: 'Badges' },
+  {
+    to: '/dev',
+    label: 'Dev',
+    children: [
+      { to: '/demo/terminal', label: 'Terminal' },
+      { to: '/demo/github-activity', label: 'Activity' },
+      { to: '/demo/code-playground', label: 'Playground' },
+      { to: '/demo/ascii-art', label: 'ASCII' },
+      { to: '/demo/achievements', label: 'Badges' },
+      { to: '/demo/effects', label: 'Effects' },
+    ],
+  },
 ];
 
-const Navbar = () => {
-  const [isVisible, setIsVisible] = useState(false);
+const Navbar: React.FC<NavbarProps> = ({ isAlwaysVisible = false }) => {
+  const [isVisible, setIsVisible] = useState(isAlwaysVisible);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDevMenuOpen, setIsDevMenuOpen] = useState(false);
+  const devMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isAlwaysVisible) {
+      setIsVisible(true);
+      return;
+    }
     const handleScroll = () => {
       setIsVisible(window.scrollY > 5);
     };
@@ -31,13 +54,69 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
       clearTimeout(timeout);
     };
+  }, [isAlwaysVisible]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (devMenuRef.current && !devMenuRef.current.contains(event.target as Node)) {
+        setIsDevMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
+  const renderNavLink = (item: NavItem, isMobile = false) => {
+    if (item.children) {
+      return (
+        <div key={item.to} className={isMobile ? '' : 'relative'} ref={!isMobile ? devMenuRef : undefined}>
+          <button
+            onClick={() => !isMobile && setIsDevMenuOpen(!isDevMenuOpen)}
+            className="text-primary dark:text-primary-dark text-sm hover:text-primary/80 dark:hover:text-primary-dark/80 transition-colors duration-200 flex items-center gap-1"
+          >
+            {item.label}
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <AnimatePresence>
+            {!isMobile && isDevMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="absolute top-full left-0 mt-2 w-40 bg-bg dark:bg-bg-dark border border-borderMuted shadow-lg"
+              >
+                {item.children.map((child) => (
+                  <Link
+                    key={child.to}
+                    to={child.to}
+                    className="block px-4 py-2 text-sm text-primary dark:text-primary-dark hover:bg-bg2 dark:hover:bg-bg2-dark transition-colors"
+                  >
+                    {child.label}
+                  </Link>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      );
+    }
+    return (
+      <Link
+        key={item.to}
+        to={item.to}
+        className="text-primary dark:text-primary-dark text-sm hover:text-primary/80 dark:hover:text-primary-dark/80 transition-colors duration-200"
+      >
+        {item.label}
+      </Link>
+    );
+  };
+
   return (
     <>
-      {/* Hamburger button - visible on mobile */}
       <button
         onClick={() => setIsMobileMenuOpen(true)}
         className="fixed top-4 right-4 z-50 p-2 md:hidden bg-bg dark:bg-bg-dark border border-borderMuted"
@@ -48,7 +127,6 @@ const Navbar = () => {
         </svg>
       </button>
 
-      {/* Desktop Navigation */}
       <AnimatePresence>
         {isVisible && (
           <motion.nav
@@ -62,26 +140,16 @@ const Navbar = () => {
               <Link to="/">My Portfolio</Link>
             </div>
             <div className="flex items-center gap-5">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className="text-primary dark:text-primary-dark text-sm hover:text-primary/80 dark:hover:text-primary-dark/80 transition-colors duration-200"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => renderNavLink(link))}
               <ThemeToggle />
             </div>
           </motion.nav>
         )}
       </AnimatePresence>
 
-      {/* Mobile Drawer */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -90,7 +158,6 @@ const Navbar = () => {
               onClick={closeMobileMenu}
             />
             
-            {/* Drawer */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
@@ -99,7 +166,6 @@ const Navbar = () => {
               className="fixed top-0 right-0 bottom-0 z-50 w-64 bg-bg dark:bg-bg-dark border-l border-borderMuted md:hidden"
             >
               <div className="flex flex-col h-full">
-                {/* Header */}
                 <div className="flex items-center justify-between p-4 border-b border-borderMuted">
                   <span className="text-lg font-semibold text-primary dark:text-primary-dark">
                     Menu
@@ -115,21 +181,38 @@ const Navbar = () => {
                   </button>
                 </div>
 
-                {/* Links */}
                 <nav className="flex-1 overflow-y-auto py-4">
                   {navLinks.map((link) => (
-                    <Link
-                      key={link.to}
-                      to={link.to}
-                      onClick={closeMobileMenu}
-                      className="block px-4 py-3 text-primary dark:text-primary-dark hover:bg-bg2 dark:hover:bg-bg2-dark transition-colors"
-                    >
-                      {link.label}
-                    </Link>
+                    <div key={link.to}>
+                      {link.children ? (
+                        <>
+                          <div className="px-4 py-2 text-sm font-semibold text-muted dark:text-muted-dark">
+                            {link.label}
+                          </div>
+                          {link.children.map((child) => (
+                            <Link
+                              key={child.to}
+                              to={child.to}
+                              onClick={closeMobileMenu}
+                              className="block px-6 py-2 pl-8 text-primary dark:text-primary-dark hover:bg-bg2 dark:hover:bg-bg2-dark transition-colors"
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </>
+                      ) : (
+                        <Link
+                          to={link.to}
+                          onClick={closeMobileMenu}
+                          className="block px-4 py-3 text-primary dark:text-primary-dark hover:bg-bg2 dark:hover:bg-bg2-dark transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </div>
                   ))}
                 </nav>
 
-                {/* Theme Toggle */}
                 <div className="p-4 border-t border-borderMuted">
                   <ThemeToggle />
                 </div>
