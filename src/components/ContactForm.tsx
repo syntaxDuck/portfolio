@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { motion } from 'framer-motion';
+import { PortfolioConfig } from '../config/portfolio';
 
 interface FormState {
   name: string;
@@ -14,9 +15,9 @@ interface SocialLink {
 }
 
 const socialLinks: SocialLink[] = [
-  { label: 'GitHub', url: '#', icon: 'GH' },
-  { label: 'LinkedIn', url: '#', icon: 'LI' },
-  { label: 'Email', url: 'mailto:example@email.com', icon: '@' },
+  { label: 'GitHub', url: `https://github.com/${PortfolioConfig.social.github}`, icon: 'GH' },
+  { label: 'LinkedIn', url: `https://linkedin.com/in/${PortfolioConfig.social.linkedin}`, icon: 'LI' },
+  { label: 'Email', url: `mailto:${PortfolioConfig.social.email}`, icon: '@' },
 ];
 
 const ContactForm = () => {

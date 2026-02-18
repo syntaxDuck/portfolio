@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { PortfolioConfig } from '../../config/portfolio';
 
 const TerminalPage: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ const TerminalPage: React.FC = () => {
     help: () => {
       return `Available commands:
   help        - Show this help message
-  about       - Learn about Kameron
+  about       - Learn about ${PortfolioConfig.name.split(' ')[0]}
   projects    - View my projects
   blog        - Read my blog
   contact     - Get in touch
@@ -26,9 +27,9 @@ const TerminalPage: React.FC = () => {
   whoami      - Display current user`;
     },
     about: () => {
-      return `Kameron Comer - Software Engineer
-Based in Austin, TX
-Specializing in full-stack development with React, TypeScript, and Node.js`;
+      return `${PortfolioConfig.name} - ${PortfolioConfig.title}
+Based in ${PortfolioConfig.location}
+${PortfolioConfig.tagline}`;
     },
     projects: () => {
       return `Opening projects page... [redirect to /projects]`;
@@ -40,7 +41,7 @@ Specializing in full-stack development with React, TypeScript, and Node.js`;
       return `Opening contact form... [redirect to /#contact]`;
     },
     github: () => {
-      window.open('https://github.com/syntaxDuck', '_blank');
+      window.open(`https://github.com/${PortfolioConfig.social.github}`, '_blank');
       return 'Opening GitHub profile in new tab...';
     },
     clear: () => {

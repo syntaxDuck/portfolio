@@ -6,7 +6,6 @@ import TerminalInput from './TerminalInput';
 import { TerminalContext } from '../../context/terminal/TerminalContext';
 import { Effects } from '../procedural-effects/types';
 import TerminalOutput from './TerminalOutput';
-import { useBodyScroll } from '../../hooks/useBodyScroll';
 
 const TerminalWrapper: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -14,8 +13,6 @@ const TerminalWrapper: React.FC = () => {
   const terminalRef = useRef<HTMLDivElement>(null);
 
   const termCtx = useContext(TerminalContext)
-
-  useBodyScroll(!termCtx.isMinimized)
 
   useEffect(() => {
     if (termCtx.isReady && inputRef.current && !termCtx.isMinimized) {
@@ -36,6 +33,8 @@ const TerminalWrapper: React.FC = () => {
   };
 
   const EffectComponent = termCtx.currentEffect ? Effects[termCtx.currentEffect]?.component : null;
+  const DefaultConfig = termCtx.currentEffect ? Effects[termCtx.currentEffect]?.config : undefined;
+  const mergedConfig = { ...DefaultConfig, ...termCtx.effectConfig };
 
   const handleMinimize = () => {
     termCtx.setIsMinimized(!termCtx.isMinimized);
@@ -58,7 +57,10 @@ const TerminalWrapper: React.FC = () => {
         >
           <div className="absolute inset-0 z-0">
             {EffectComponent && (
-              <EffectComponent className="w-full h-full opacity-40" />
+              <EffectComponent 
+                className="w-full h-full opacity-40" 
+                {...mergedConfig}
+              />
             )}
           </div>
 

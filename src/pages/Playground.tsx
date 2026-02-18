@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Typewriter from '../components/Typewriter';
 import { TerminalPrompt, TypewriterWithDelete, StaggeredLines, InfiniteTypewriter } from '../components/TypewriterVariants';
+import { PortfolioConfig } from '../config/portfolio';
 
 type Speed = 'slow' | 'normal' | 'fast';
 
@@ -70,7 +71,7 @@ function Playground() {
         </h2>
         <div className="p-4 bg-bg2 dark:bg-bg2-dark border border-borderMuted dark:border-borderMuted">
           <Typewriter
-            text="Hi, I'm Kameron Comer"
+            text={`Hi, I'm ${PortfolioConfig.name}`}
             speed={speedMap[selectedSpeed]}
             cursor={selectedCursor}
             className="text-xl"
@@ -123,9 +124,9 @@ function Playground() {
         <div className="p-4 bg-bg2 dark:bg-bg2-dark border border-borderMuted dark:border-borderMuted">
           <StaggeredLines
             lines={[
-              'const developer = "Kameron Comer";',
+              `const developer = "${PortfolioConfig.name}";`,
               'const skills = ["React", "Node", "TypeScript"];',
-              'const location = "San Francisco, CA";',
+              `const location = "${PortfolioConfig.location}";`,
               'console.log("Hello, World!");',
             ]}
             speed={speedMap[selectedSpeed]}
@@ -159,7 +160,7 @@ function Playground() {
         </h2>
         <div className="p-4 bg-bg2 dark:bg-bg2-dark border border-borderMuted dark:border-borderMuted">
           <Typewriter
-            text='const name = "Kameron Comer";'
+            text={`const name = "${PortfolioConfig.name}";`}
             speed={speedMap[selectedSpeed]}
             cursor={selectedCursor}
             className="text-lg"

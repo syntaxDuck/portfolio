@@ -19,6 +19,7 @@ const TerminalContextProvider: React.FC<TerminalContextProvider> = ({ children }
   const [cmdHistoryIdx, setCmdHistoryIdx] = useState<number>(defaultTerminalState.cmdHistoryIdx)
   const [currentEffect, setCurrentEffect] = useState<EffectKey | null>(defaultTerminalState.currentEffect);
   const [minimizedEffect, setMinimizedEffect] = useState<EffectKey | null>(defaultTerminalState.minimizedEffect);
+  const [effectConfig, setEffectConfig] = useState<Record<string, unknown>>(defaultTerminalState.effectConfig);
 
   const bootStartedRef = useRef(false);
 
@@ -29,9 +30,11 @@ const TerminalContextProvider: React.FC<TerminalContextProvider> = ({ children }
   const handleCmdHistoryIdx = (val: number) => setCmdHistoryIdx(val)
   const handleUpdateCurrentEffect = (val: EffectKey | null) => setCurrentEffect(val)
   const handleUpdateMinimizedEffect = (val: EffectKey | null) => setMinimizedEffect(prev => val ? val : prev || selectRandomEffect())
+  const handleUpdateEffectConfig = (config: Record<string, unknown>) => setEffectConfig(config);
 
   const rebootTerminal = () => {
     bootStartedRef.current = false;
+    localStorage.removeItem('portfolio_has_visited');
     setBootLines([]);
     setOutputBuff([]);
     setIsBooting(true);
@@ -44,6 +47,20 @@ const TerminalContextProvider: React.FC<TerminalContextProvider> = ({ children }
 
   useEffect(() => {
     if (!isBooting || bootStartedRef.current) return;
+    
+    const hasVisited = localStorage.getItem('portfolio_has_visited');
+    
+    if (hasVisited) {
+      bootStartedRef.current = true;
+      /* eslint-disable react-hooks/set-state-in-effect */
+      setIsBooting(false);
+      setIsReady(true);
+      setIsMinimized(true);
+      setOutputBuff(aboutContent);
+      /* eslint-enable react-hooks/set-state-in-effect */
+      return;
+    }
+    
     bootStartedRef.current = true;
     
     let mounted = true;
@@ -63,10 +80,11 @@ const TerminalContextProvider: React.FC<TerminalContextProvider> = ({ children }
         setIsReady(true);
         setIsMinimized(true);
         setOutputBuff(aboutContent);
+        localStorage.setItem('portfolio_has_visited', 'true');
       }
     }, totalDuration + 500);
 
-    return () => { mounted = false; };
+    return () => { mounted = false };
   }, [isBooting]);
 
   const terminalState: TerminalState = {
@@ -80,6 +98,7 @@ const TerminalContextProvider: React.FC<TerminalContextProvider> = ({ children }
     cmdHistoryIdx: cmdHistoryIdx,
     currentEffect: currentEffect,
     minimizedEffect: minimizedEffect,
+    effectConfig: effectConfig,
     appendBootLines: appendBootLines,
     setIsMinimized: setIsMinimized,
     setIsBooting: setIsBooting,
@@ -91,6 +110,7 @@ const TerminalContextProvider: React.FC<TerminalContextProvider> = ({ children }
     setCmdHistoryIdx: handleCmdHistoryIdx,
     setCurrentEffect: handleUpdateCurrentEffect,
     setMinimizedEffect: handleUpdateMinimizedEffect,
+    setEffectConfig: handleUpdateEffectConfig,
     rebootTerminal: rebootTerminal,
   }
 

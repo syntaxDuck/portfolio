@@ -1,8 +1,9 @@
 import React from 'react';
+import { PortfolioConfig } from '../config/portfolio';
 
 const About = () => {
     return (<h1>
-        Hey, I'm Kameron
+        Hey, I'm {PortfolioConfig.name.split(' ')[0]}
     </h1>)
 }
 
